@@ -10,7 +10,7 @@ const pushWeather = (data) => {
   places.value.push(data)
 }
 const deleteCard = (name) => {
-  if (confirm('Are you sure?')) {
+  if (confirm('Are you sure you want to delete this card?')) {
     places.value = places.value.filter((p) => p.location.name !== name)
   }
 }

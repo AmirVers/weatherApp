@@ -20,7 +20,9 @@ defineProps({
           <img :src="place.day.condition.icon" alt="icon" width="30" class="mx-auto" />
         </td>
 
-        <td class="w-1/3 text-right">{{ place.day.maxtemp_c }} / {{ place.day.mintemp_c }}</td>
+        <td class="w-1/3 text-right">
+          {{ Math.round(place.day.maxtemp_c) }}&deg; / {{ Math.round(place.day.mintemp_c) }}&deg;
+        </td>
       </tr>
     </table>
   </div>

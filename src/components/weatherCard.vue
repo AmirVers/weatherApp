@@ -12,6 +12,21 @@ const removePlace = (placeName) => {
   emit('deletePlace', placeName)
   moreInfo.value = false
 }
+
+const hoursTime = (place) => {
+  if (new Date(place.location.localtime).getHours() < 10) {
+    return `0${new Date(place.location.localtime).getHours()}`
+  }
+  return new Date(place.location.localtime).getHours()
+}
+
+const minutesTime = (place) => {
+  if (new Date(place.location.localtime).getMinutes() < 10) {
+    return `0${new Date(place.location.localtime).getMinutes()}`
+  }
+  return new Date(place.location.localtime).getMinutes()
+}
+
 defineProps({
   place: Object
 })
@@ -26,16 +41,13 @@ defineProps({
         <h1 class="text-3xl">{{ place.location.name }}</h1>
       </div>
       <div class="flex items-center justify-center gap-2">
-        <h1 class="text-3xl">
-          {{ new Date(place.location.localtime).getHours() }} :
-          {{ new Date(place.location.localtime).getMinutes() }}
-        </h1>
+        <h1 class="text-3xl">{{ hoursTime(place) }} : {{ minutesTime(place) }}</h1>
       </div>
     </div>
 
     <div class="text-center flex-1">
       <img :src="place.current.condition.icon" alt="icon" width="200" class="mx-auto -mb-10" />
-      <h1 class="text-9xl mb-2">{{ place.current.temp_c }}&deg;</h1>
+      <h1 class="text-9xl mb-2">{{ Math.round(place.current.temp_c) }}&deg;</h1>
       <p class="text-2xl">{{ place.current.condition.text }}</p>
     </div>
 
